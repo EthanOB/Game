@@ -11,15 +11,6 @@ A jumping joe game.
 -Leaderboard
 -Menu
 
-Air hockey.
--Menu
--Bouncing
--Sliding
--Scoring
--Winning
--Multiplayer (online or offline)
--Mouse control
-
 Tower Defence?
 -Menu
 -Enemy
@@ -27,13 +18,6 @@ Tower Defence?
 -A way to find the enemys so you can shoot at them
 -scoring
 -randomly generated levels
-
-Spaceship Game?
--Menu
--Drift
--shoot
--kill asteroids
--idk what else
 
 Tree growing simulator
 -Menu
