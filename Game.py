@@ -6,15 +6,18 @@ DISPLAYSURF = pygame.display.set_mode((400, 300))
 
 pygame.display.set_caption('Hello World!')
 
-gameDisplay = pygame.display.set_mode((200,200))
+def Plant(x, y):
+    DISPLAYSURF.blit(pygame.image.load('Plant1.png'), (x,y))
 
-def car(x,y):
-    gameDisplay.blit(pygame.image.load('Plant1.png'))
 pygame.display.set_caption('Tree Game')
+x = 0
+y = 1
 while True: # main game loop
-    gameDisplay.fill((0,0,200))
+    DISPLAYSURF.fill((0,0,200))
+    Plant(x, y)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            sys.exit()
+    x = x+1
+    y = y +1
     pygame.display.update()
