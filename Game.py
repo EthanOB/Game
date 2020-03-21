@@ -1,47 +1,41 @@
-import * from Config
-import pygame, time
+from Config import *
+import pygame, random
 pygame.init()
 
-#Ethan:
-#Learn how to draw stuff on the window
-#Kaleb:
-#Learn how to do time
-#Set the ticks up
+#def PlantGrowImage(grow):
+#    if grow <= 25
+#       Num = 1
+ #  elif grow <= 50
+#       Num = 3
+ #  elif grow<= 75
+#       Num = 4
+ #  elif grow <= 100
+#       Num = 6
+ #  return pygame.image.load(f"Plant{Num}.png")
 
-def Tick():
+class Tree:
+    def __init__(self, Pos):
+        self.Pos = Pos
+        self.Img = pygame.image.load("Plant6.png")
 
+screen = pygame.display.set_mode((1000, 500))
+clock = pygame.time.Clock()
 
-TicksPerMinute = 5
-WaterBoost = 20
+Plant = Tree((0, 0))
 
-class Plant():
-    def __init__(self):
-        self.GrowthRate = 5
-        self.AppleInterval = 100
-        self.DeathScore = 200
+while True:
+    screen.fill((0, 0, 0))
+    pygame.draw.rect(screen, (100, 60, 1), pygame.Rect(0, 350, 1000, 150))
+    pygame.draw.rect(screen, (0, 128, 200), pygame.Rect(0, 0, 1000, 350))
 
-        self.Growth = 0
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            pygame.quit()
+            exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            MousePos = pygame.mouse.get_pos()
+            Plant = Tree((MousePos[0], 125))
+    screen.blit(Plant.Img, Plant.Pos)
 
-    Plant1 = pygame.image.load('Plant1.png')
-    Plant2 = pygame.image.load('Plant2.png')
-    Plant3 = pygame.image.load('Plant3.png')
-    Plant4 = pygame.image.load('Plant4.png')
-    Plant5 = pygame.image.load('Plant5.png')
-    Plant6 = pygame.image.load('Plant6.png')
-
-class Player()
-    def __init__(self):
-        self.Seeds = 5
-        self.Apples = 0
-        self.Water = 5
-
-SCREEN_WIDTH = 2000
-SCREEN_HEIGHT = 500
-
-screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-
-running = True
-while running:
-
-
-pygame.quit()
+    pygame.display.flip()
+    clock.tick(60)
