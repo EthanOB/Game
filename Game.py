@@ -32,11 +32,11 @@ while True:
             MousePos = pygame.mouse.get_pos()
             Trees.append(Plant((MousePos[0]-math.floor(pygame.image.load("Plant1.png").get_size()[0]/2), 125)))
             Player.Seeds = Player.Seeds - 1
-#       if Player.Apples
 
     for i in range(len(Trees)):
         screen.blit(Trees[i].Img, Trees[i].Pos)
         Trees[i].Img = pygame.image.load(f"Plant{round(Trees[i].Progress/25) if round(Trees[i].Progress/25) != 0 else 1}.png")
         Trees[i].Progress = Trees[i].Progress + 1/60
+        
     pygame.display.flip()
     clock.tick(60) #60fps
