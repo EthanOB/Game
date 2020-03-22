@@ -33,14 +33,16 @@ while True:
             MousePos = pygame.mouse.get_pos()
             Trees.append(Plant((MousePos[0]-math.floor(pygame.image.load("Plant1.png").get_size()[0]/2), 125)))
             Player.Seeds = Player.Seeds - 1
+        if event.type == pygame.KEYDOWN and Player.Apples >= 0 and event.key == pygame.K_a:
+            Player.Apples = Player.Apples - 1
+            Player.Seeds = Player.Seeds + 1
 
     for i in range(len(Trees)):
         screen.blit(Trees[i].Img, Trees[i].Pos)
         Trees[i].Img = pygame.image.load(f"Plant{(round(Trees[i].Progress/25) if round(Trees[i].Progress/25) != 0 else 1) if round(Trees[i].Progress/25) < 5 else 4}.png")
-        Trees[i].Progress = Trees[i].Progress + 1/30
+        Trees[i].Progress = Trees[i].Progress + 1/10
         if (round(Trees[i].Progress/25) == 5 and Trees[i].Apples != 1) or (round(Trees[i].Progress/25) == 6 and Trees[i].Apples != 2):
             Trees[i].Apples = Trees[i].Apples + 1
             Player.Apples = Player.Apples + 1
-    print(Player.Apples)
     pygame.display.flip()
     clock.tick(60) #60fps
