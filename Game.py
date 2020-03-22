@@ -25,7 +25,7 @@ screen = pygame.display.set_mode((1000, 500))
 clock = pygame.time.Clock()
 
 Trees = []
-Pops = []
+Pop = []
 while True:
     screen.fill((0, 0, 0))
     pygame.draw.rect(screen, (100, 60, 1), pygame.Rect(0, 350, 1000, 150))
@@ -39,7 +39,7 @@ while True:
             MousePos = pygame.mouse.get_pos()
             Trees.append(Plant((MousePos[0]-math.floor(pygame.image.load("Plant1.png").get_size()[0]/2), 125)))
             Player.Seeds = Player.Seeds - 1
-        if event.type == pygame.KEYDOWN and Player.Apples >= 0 and event.key == pygame.K_a:
+        if event.type == pygame.KEYDOWN and Player.Apples > 0 and event.key == pygame.K_a:
             Player.Apples = Player.Apples - 1
             Player.Seeds = Player.Seeds + 1
 
@@ -55,7 +55,13 @@ while True:
                     #screen.blit(Trees[i].AppleList[i2].Img, Trees[i].ApplePos)
                 Trees[i].Apples = Trees[i].Apples + 1
                 Player.Apples = Player.Apples + 1
-    
-    print((Player.Seeds, Trees))
+        else:
+            Pop.append(Trees.index(Trees[i]))
+
+    for i in range(len(Pop)):
+        Pop.sort()
+        Trees.pop(Pop[i])
+        Pop = []
+
     pygame.display.flip()
     clock.tick(60) #60fps
