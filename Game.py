@@ -1,28 +1,24 @@
 from Config import *
-import pygame, random
+import pygame, random, math
 pygame.init()
 
-#def PlantGrowImage(grow):
-#    if grow <= 25
-#       Num = 1
- #  elif grow <= 50
-#       Num = 3
- #  elif grow<= 75
-#       Num = 4
- #  elif grow <= 100
-#       Num = 6
- #  return pygame.image.load(f"Plant{Num}.png")
+## TODO: Apples, Sell apples, Buy seeds, Trees die after 2 apples
 
-class Tree:
+class Player:
+    Seeds = 5
+    Money = 0
+    Apples = 0
+
+class Plant:
     def __init__(self, Pos):
         self.Pos = Pos
-        self.Img = pygame.image.load("Plant6.png")
+        self.Progress = 0
+        self.Img = pygame.image.load("Plant1.png")
 
 screen = pygame.display.set_mode((1000, 500))
 clock = pygame.time.Clock()
 
-Plant = Tree((0, 0))
-
+Trees = []
 while True:
     screen.fill((0, 0, 0))
     pygame.draw.rect(screen, (100, 60, 1), pygame.Rect(0, 350, 1000, 150))
@@ -32,10 +28,15 @@ while True:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             pygame.quit()
             exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and Player.Seeds != 0:
             MousePos = pygame.mouse.get_pos()
-            Plant = Tree((MousePos[0], 125))
-    screen.blit(Plant.Img, Plant.Pos)
+            Trees.append(Plant((MousePos[0]-math.floor(pygame.image.load("Plant1.png").get_size()[0]/2), 125)))
+            Player.Seeds = Player.Seeds - 1
+#       if Player.Apples
 
+    for i in range(len(Trees)):
+        screen.blit(Trees[i].Img, Trees[i].Pos)
+        Trees[i].Img = pygame.image.load(f"Plant{round(Trees[i].Progress/25) if round(Trees[i].Progress/25) != 0 else 1}.png")
+        Trees[i].Progress = Trees[i].Progress + 1/60
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(60) #60fps
