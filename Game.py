@@ -13,11 +13,11 @@ class Plant:
         self.Apples = 0
         self.AppleList = []
         self.Img = pygame.image.load("Plant1.png")
-        self.ApplePos = (math.floor(self.Pos[0]+self.Pos[0]/2), 50)
+        self.ApplePos = (Pos[0]+random.randrange(35, 75), Pos[1]+random.randrange(35, 75))
 
     class Apple:
         def __init__(self, Pos):
-            self.Img = pygame.transform.scale(pygame.image.load("Apple.png"), (250,250))
+            self.Img = pygame.transform.scale(pygame.image.load("Apple.png"), (50, 50))
             self.Pos = Pos
 
 screen = pygame.display.set_mode((1000, 500))
@@ -45,7 +45,9 @@ while True:
 
     for i in range(len(Trees)):
         screen.blit(Trees[i].Img, Trees[i].Pos)
-        print(Trees[i].Apples, Trees[i].Progress)
+        for i2 in range(len(Trees[i].AppleList)):
+            screen.blit(Trees[i].AppleList[i2].Img, Trees[i].ApplePos)
+
         if Trees[i].Progress < 200:
                 Trees[i].Img = pygame.image.load(f"Plant{(round(Trees[i].Progress/25) if round(Trees[i].Progress/25) != 0 else 1) if round(Trees[i].Progress/25) < 5 else 4}.png")
                 Trees[i].Progress = Trees[i].Progress + 1/10
@@ -53,6 +55,7 @@ while True:
                     Trees[i].AppleList.append(Trees[i].Apple(Trees[i].ApplePos))
                     Trees[i].Apples = Trees[i].Apples + 1
                     Player.Apples = Player.Apples + 1
+
         else:
             Pop.append(Trees.index(Trees[i]))
 
