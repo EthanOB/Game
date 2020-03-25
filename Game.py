@@ -46,13 +46,13 @@ while True:
     for i in range(len(Trees)):
         screen.blit(Trees[i].Img, Trees[i].Pos)
         print(Trees[i].Apples, Trees[i].Progress)
-        if (Trees[i].Apples < 2 and Trees[i].Progress < 600):
-            Trees[i].Img = pygame.image.load(f"Plant{round(Trees[i].Progress/25) if round(Trees[i].Progress/25) != 0 else 1}.png")
-            Trees[i].Progress = Trees[i].Progress + 1/10
-            if Trees[i].Progress/25 > 4:
-                Trees[i].AppleList.append(Trees[i].Apple(Trees[i].ApplePos))
-                Trees[i].Apples = Trees[i].Apples + 1
-                Player.Apples = Player.Apples + 1
+        if Trees[i].Progress < 200:
+                Trees[i].Img = pygame.image.load(f"Plant{(round(Trees[i].Progress/25) if round(Trees[i].Progress/25) != 0 else 1) if round(Trees[i].Progress/25) < 5 else 4}.png")
+                Trees[i].Progress = Trees[i].Progress + 1/10
+                if Trees[i].Progress/25 > 4 and Trees[i].Apples < 2:
+                    Trees[i].AppleList.append(Trees[i].Apple(Trees[i].ApplePos))
+                    Trees[i].Apples = Trees[i].Apples + 1
+                    Player.Apples = Player.Apples + 1
         else:
             Pop.append(Trees.index(Trees[i]))
 
