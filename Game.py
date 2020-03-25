@@ -29,10 +29,11 @@ Pop = []
 while True:
     screen.fill((0, 0, 0))
     pygame.draw.rect(screen, (100, 60, 1), pygame.Rect(0, 350, 1000, 150))
+    pygame.draw.rect(screen, (30, 125, 75), pygame.Rect(0, 350, 1000, 50))
     pygame.draw.rect(screen, (0, 128, 200), pygame.Rect(0, 0, 1000, 350))
 
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE or event.type == pygame.QUIT:
             pygame.quit()
             exit()
         if event.type == pygame.MOUSEBUTTONDOWN and Player.Seeds != 0:
@@ -51,8 +52,6 @@ while True:
             Trees[i].Progress = Trees[i].Progress + 1/10
             if Trees[i].Progress/25 > 4:
                 Trees[i].AppleList.append(Trees[i].Apple(Trees[i].ApplePos))
-                #for i2 in range(len(Trees[i].AppleList)):
-                    #screen.blit(Trees[i].AppleList[i2].Img, Trees[i].ApplePos)
                 Trees[i].Apples = Trees[i].Apples + 1
                 Player.Apples = Player.Apples + 1
         else:
