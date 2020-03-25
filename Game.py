@@ -1,7 +1,7 @@
 from Config import *
 import pygame, random, math
 pygame.init()
-
+#TODO add randomized time
 class Player:
     Seeds = 5
     Apples = 0
@@ -17,9 +17,8 @@ class Plant:
 
     class Apple:
         def __init__(self, Pos):
-            self.Img = pygame.image.load("Apple.png")
+            self.Img = pygame.transform.scale(pygame.image.load("Apple.png"), (250,250))
             self.Pos = Pos
-
 
 screen = pygame.display.set_mode((1000, 500))
 clock = pygame.time.Clock()
@@ -45,8 +44,8 @@ while True:
 
     for i in range(len(Trees)):
         screen.blit(Trees[i].Img, Trees[i].Pos)
-
-        if Trees[i].Apples < 2:
+        print(Trees[i].Apples, Trees[i].Progress)
+        if (Trees[i].Apples < 2 and Trees[i].Progress < 600):
             Trees[i].Img = pygame.image.load(f"Plant{round(Trees[i].Progress/25) if round(Trees[i].Progress/25) != 0 else 1}.png")
             Trees[i].Progress = Trees[i].Progress + 1/10
             if Trees[i].Progress/25 > 4:
